@@ -35,7 +35,7 @@ public class Point {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Point point = (Point) o;
+        var point = (Point) o;
         return x == point.x && y == point.y;
     }
 
@@ -47,8 +47,11 @@ public class Point {
 
     @Override
     public String toString() {
-        String stringBuild = "Point: " + "x = " +
-                x + " y = " + y;
-        return stringBuild;
+        var stringBuilder = new StringBuilder();
+        stringBuilder.append("\nPoint: ");
+        stringBuilder.append("\nX = ").append(x);
+        stringBuilder.append("\nY = ").append(y);
+
+        return stringBuilder.toString();
     }
 }

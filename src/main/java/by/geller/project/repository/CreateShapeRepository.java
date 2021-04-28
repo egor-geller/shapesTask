@@ -3,13 +3,26 @@ package by.geller.project.repository;
 import by.geller.project.entity.Quadrangle;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class Repository {
+public class CreateShapeRepository {
     private List<Quadrangle> shapes;
+    private static CreateShapeRepository instance;
+
+    private CreateShapeRepository(){
+        shapes = new ArrayList<>();
+    }
+
+    public static CreateShapeRepository getInstance(){
+        if (instance == null){
+            instance = new CreateShapeRepository();
+        }
+        return instance;
+    }
 
     public boolean add(Quadrangle quadrangle) {
         return shapes.add(quadrangle);

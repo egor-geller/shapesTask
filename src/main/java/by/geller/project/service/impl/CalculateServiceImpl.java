@@ -67,7 +67,7 @@ public class CalculateServiceImpl implements CalculateService {
         //Perimeter for Trapezoid
         if (quadranglePerimeter.getFigureName().equals("Trapezoid")) {
             double d1 = distanceBetweenTwoPoints(0, 0, point1X, point1Y);
-            double d3 = (double) point2X - point1X;
+            double d3 = point2X - point1X;
             double d4 = distanceBetweenTwoPoints(point2X, point2Y, point3X, point3Y);
 
             double perimeterOfTrapezoid = d1 + point3X + d3 + d4;

@@ -5,7 +5,6 @@ import by.geller.project.exception.QuadrangleException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class ShapeValidator {
@@ -22,8 +21,8 @@ public class ShapeValidator {
     static final String LINE_VALIDATION = "(\\D+:\\s+«\\d+.\\d+\\s+\\d+.\\d+\\s+\\d+.\\d+»)";
 
     public static boolean isShape(String input) {
-        Pattern pattern = Pattern.compile(LINE_VALIDATION);
-        Matcher matcher = pattern.matcher(input.trim());
+        var pattern = Pattern.compile(LINE_VALIDATION);
+        var matcher = pattern.matcher(input.trim());
 
         logger.info("method isQuadrangle for line {} returns {}", input, matcher.matches());
 

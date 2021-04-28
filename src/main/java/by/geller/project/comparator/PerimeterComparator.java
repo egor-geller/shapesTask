@@ -5,12 +5,12 @@ import by.geller.project.service.impl.CalculateServiceImpl;
 
 import java.util.Comparator;
 
-public class AreaComparator implements Comparator<Quadrangle> {
+public class PerimeterComparator implements Comparator<Quadrangle> {
     @Override
     public int compare(Quadrangle o1, Quadrangle o2) {
         var calculateService = new CalculateServiceImpl();
-        double area1 = calculateService.areaOfFigure(o1);
-        double area2 = calculateService.areaOfFigure(o2);
+        double area1 = calculateService.perimeterOfFigure(o1);
+        double area2 = calculateService.perimeterOfFigure(o2);
 
         int compare = Double.compare(area1, area2);
 
