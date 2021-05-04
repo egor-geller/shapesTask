@@ -1,6 +1,7 @@
 package by.geller.project.repository.impl;
 
 import by.geller.project.entity.Quadrangle;
+import by.geller.project.exception.QuadrangleException;
 import by.geller.project.repository.Specification;
 import by.geller.project.service.CalculateService;
 import by.geller.project.service.impl.CalculateServiceImpl;
@@ -20,7 +21,13 @@ public class PerimeterSpecification implements Specification {
     @Override
     public boolean specifyQuadrangle(Quadrangle quadrangle) {
         CalculateService perimeterOfFigureService = new CalculateServiceImpl();
-        double perimeter = perimeterOfFigureService.perimeterOfFigure(quadrangle);
+
+        double perimeter = 0;
+        try {
+            perimeter = perimeterOfFigureService.perimeterOfFigure(quadrangle);
+        } catch (QuadrangleException e) {
+            logger.error("Cannot find perimeter {}", e.getMessage());
+        }
 
         boolean result = perimeter >= minimumPerimeter && perimeter <= maximumPerimeter;
         logger.info("Perimeter: {}, Result: {}", perimeter, result);

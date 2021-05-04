@@ -1,15 +1,22 @@
 package by.geller.project.entity;
 
 import by.geller.project.exception.QuadrangleException;
+import by.geller.project.observer.Observable;
+import by.geller.project.observer.QuadrangleEvent;
+import by.geller.project.observer.impl.QuadrangleObserverImpl;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
-public class Quadrangle {
+public class Quadrangle implements Observable {
     private String figureName;
     private Point point;
     private Point point1;
     private Point point2;
     private Point point3;
+
+    private List<QuadrangleObserverImpl> observers = new ArrayList<>();
 
     private static final String ERROR_MSG = "Point can't be null";
 
@@ -22,12 +29,21 @@ public class Quadrangle {
         this.point1 = point1;
     }
 
+    //
     public Quadrangle(String name, Point point1, Point point2, Point point3) {
         this.figureName = name;
-        this.point = new Point(0,0);
+        this.point = new Point(0, 0);
         this.point1 = point1;
         this.point2 = point2;
         this.point3 = point3;
+    }
+
+    public Quadrangle(String name, double x1, double y1, double x2, double y2, double x3, double y3) {
+        this.figureName = name;
+        this.point = new Point(0, 0);
+        this.point1 = new Point(x1, y1);
+        this.point2 = new Point(x2, y2);
+        this.point3 = new Point(x3, y3);
     }
 
     public Quadrangle(Quadrangle quadrangle) {
@@ -104,5 +120,26 @@ public class Quadrangle {
         stringBuilder.append("\npoint4: ").append(point3);
 
         return stringBuilder.toString();
+    }
+
+    @Override
+    public void attach(QuadrangleObserverImpl observer) {
+        observers.add(observer);
+    }
+
+    @Override
+    public void detach(QuadrangleObserverImpl observer) {
+        observers.remove(observer);
+    }
+
+    @Override
+    public void notifyObservers() {
+        QuadrangleEvent quadrangleEvent = new QuadrangleEvent(this);
+        if (!observers.isEmpty()) {
+            for (QuadrangleObserverImpl observer : observers) {
+                observer.updateArea(quadrangleEvent);
+                observer.updatePerimeter(quadrangleEvent);
+            }
+        }
     }
 }

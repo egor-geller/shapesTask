@@ -19,4 +19,13 @@ public class QuadrangleRepositoryCreator {
         createShapeRepository.add(quadrangle);
         logger.info("Quadrangle {} with points: (0,0), ({}), ({}), ({}) has been created", nameOfShape, point1, point2, point3);
     }
+
+    public void createRepositoryForQuadrangle(String nameOfShape, double x1, double y1, double x2, double y2, double x3, double y3) throws QuadrangleException {
+        Quadrangle quadrangle = ShapeFactory.createQuadrangle(nameOfShape, x1, y1, x2, y2, x3, y3);
+        QuadrangleWarehouseCreator warehouseCreator = new QuadrangleWarehouseCreator();
+        warehouseCreator.createQuadrangleWarehouse(quadrangle);
+        CreateShapeRepository createShapeRepository = CreateShapeRepository.getInstance();
+        createShapeRepository.add(quadrangle);
+        logger.info("Quadrangle {} with points: (0,0), ({},{}), ({},{}), ({},{}) has been created", nameOfShape, x1, y1, x2, y2, x3, y3);
+    }
 }

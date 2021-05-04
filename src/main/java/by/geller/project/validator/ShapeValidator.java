@@ -18,7 +18,7 @@ public class ShapeValidator {
 
     private static final Logger logger = LogManager.getLogger();
 
-    static final String LINE_VALIDATION = "(\\D+:\\s+«\\d+.\\d+\\s+\\d+.\\d+\\s+\\d+.\\d+»)";
+    static final String LINE_VALIDATION = "(\\D+:\\s+\\d+.\\d+\\s+\\d+.\\d+\\s+\\d+.\\d+\\s+\\d+.\\d+\\s+\\d+.\\d+\\s+\\d+.\\d+)";
 
     public static boolean isShape(String input) {
         var pattern = Pattern.compile(LINE_VALIDATION);

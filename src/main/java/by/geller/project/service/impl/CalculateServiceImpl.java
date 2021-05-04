@@ -1,9 +1,16 @@
 package by.geller.project.service.impl;
 
 import by.geller.project.entity.Quadrangle;
+import by.geller.project.exception.QuadrangleException;
 import by.geller.project.service.CalculateService;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class CalculateServiceImpl implements CalculateService {
+    private static final Logger logger = LogManager.getLogger();
+
+    String MSG_NULL_ERROR = "Quadrangle must not be null";
+
     Quadrangle quadrangle = new Quadrangle();
     double point1X = quadrangle.getPoint1().getX();
     double point1Y = quadrangle.getPoint1().getY();
@@ -14,8 +21,13 @@ public class CalculateServiceImpl implements CalculateService {
 
 
     @Override
-    public double areaOfFigure(Quadrangle quadrangleArea) {
+    public double areaOfFigure(Quadrangle quadrangleArea) throws QuadrangleException{
         //Init Point1, Point2, Point3
+        if (quadrangleArea == null){
+            logger.error(MSG_NULL_ERROR);
+            throw new QuadrangleException(MSG_NULL_ERROR);
+        }
+
         quadrangle = new Quadrangle(quadrangleArea);
 
         //Area of square
@@ -53,8 +65,12 @@ public class CalculateServiceImpl implements CalculateService {
     }
 
     @Override
-    public double perimeterOfFigure(Quadrangle quadranglePerimeter) {
+    public double perimeterOfFigure(Quadrangle quadranglePerimeter) throws QuadrangleException {
         //Init Point1, Point2, Point3
+        if (quadranglePerimeter == null){
+            logger.error(MSG_NULL_ERROR);
+            throw new QuadrangleException(MSG_NULL_ERROR);
+        }
         quadrangle = new Quadrangle(quadranglePerimeter);
 
         //Perimeter for Square or Rhombus
